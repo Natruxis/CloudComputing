@@ -1,35 +1,24 @@
-import com.amazonaws.services.lambda.runtime.Context;
-
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+package vgu.cloud26;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
-
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
-
 import java.util.Base64;
-
 import java.util.Properties;
 
 import org.json.JSONArray;
-
 import org.json.JSONObject;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-
 import software.amazon.awssdk.regions.Region;
-
 import software.amazon.awssdk.services.rds.RdsUtilities;
-
 import software.amazon.awssdk.services.rds.model.GenerateAuthenticationTokenRequest;
 
  
@@ -45,14 +34,14 @@ public class LambdaGetPhotosDB implements RequestHandler<APIGatewayProxyRequestE
     private static final int RDS_INSTANCE_PORT = 3306;
     // der Datenbank-Benutzername
 
-    private static final String DB_USER = "database-1";
+    private static final String DB_USER = "admin";
     // die JDBC-URL für die Verbindung zur Datenbank
 
     private static final String JDBC_URL
 
             = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME
 
-            + ":" + RDS_INSTANCE_PORT + "/cloud26"; // Datenbankname den ich auf windows im terminal für die cloud erstllt habe ist cloud26
+            + ":" + RDS_INSTANCE_PORT + "/cloud26"; // Datenbankname auf windows console created
 
  
 
@@ -184,7 +173,7 @@ public class LambdaGetPhotosDB implements RequestHandler<APIGatewayProxyRequestE
 
                                 .username(DB_USER)
 
-                                .region(Region.AP_SOUTHEAST_1)
+                                .region(Region.AP_SOUTHEAST_2)
 
                                 .credentialsProvider(DefaultCredentialsProvider.create())
 
